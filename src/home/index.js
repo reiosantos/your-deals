@@ -1,4 +1,5 @@
 import withStyles from '@material-ui/core/styles/withStyles';
+import Axios from 'axios';
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -26,24 +27,14 @@ const sections = [
 
 const featuredCars = [
 	{
-		title: 'Featured post',
-		date: 'Nov 12',
-		description:
-			'This is a wider card with supporting text below as a natural lead-in to additional content.',
-		image: 'https://source.unsplash.com/random',
-		imageText: 'Image Text',
+		title: 'UnSplash-13',
+		image: require('../static/images/unsplash-1.jpg'),
 	},
 	{
-		title: 'Post title',
-		date: 'Nov 11',
-		description:
-			'This is a wider card with supporting text below as a natural lead-in to additional content.',
-		image: 'https://source.unsplash.com/random',
-		imageText: 'Image Text',
+		title: 'UnSplash-2',
+		image: require('../static/images/unsplash-2.jpg'),
 	},
 ];
-
-const models = [];
 
 const sidebar = {
 	title: 'Search Filter',
@@ -56,8 +47,31 @@ const sidebar = {
 };
 
 class App extends React.Component {
+	state = {
+		deals: []
+	};
+	
+	constructor(props) {
+		super(props);
+		this.fetchCars();
+	}
+	
+	fetchCars() {
+		const data = {
+			"type":"personal",
+			"modelID":"x2 xdrive18 suv",
+			"page":"1"
+		};
+		Axios.post('https://leasing.deals/get-all-deals', data)
+			.then(resp => resp.data)
+			.then(response => {
+				this.setState({ ...response });
+			});
+	}
+	
 	render() {
 		const { classes } = this.props;
+		const { deals } = this.state;
 		
 		return (
 			<React.Fragment>
@@ -77,7 +91,7 @@ class App extends React.Component {
 								archives={sidebar.archives}
 								social={sidebar.social}
 							/>
-							<Main title="Car Models List" posts={models}/>
+							<Main title="Car Models List" deals={deals}/>
 						</Grid>
 					</main>
 				</Container>
