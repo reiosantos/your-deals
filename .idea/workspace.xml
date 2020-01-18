@@ -26,11 +26,10 @@
   <component name="ChangeListManager">
     <list default="true" id="284d9480-52cf-4bce-80ad-3f4ab155dbc7" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/FeatureCar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/FeatureCar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/home/CarListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/CarListItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/home/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/Main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/home/Markdown.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/home/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/home/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/static/styles/index.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/static/styles/index.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -185,7 +184,7 @@
       <updated>1579104890923</updated>
       <workItem from="1579104892851" duration="8180000" />
       <workItem from="1579199009208" duration="399000" />
-      <workItem from="1579284976938" duration="5580000" />
+      <workItem from="1579284976938" duration="11681000" />
     </task>
     <task id="LOCAL-00001" summary="Create page layout">
       <created>1579119706297</created>
@@ -194,7 +193,21 @@
       <option name="project" value="LOCAL" />
       <updated>1579119706297</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Add API implementation">
+      <created>1579334877616</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1579334877616</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add Pagination">
+      <created>1579337094962</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1579337094962</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -202,36 +215,50 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Create page layout" />
-    <option name="LAST_COMMIT_MESSAGE" value="Create page layout" />
+    <MESSAGE value="Add API implementation" />
+    <MESSAGE value="Add Pagination" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Pagination" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="301" y="51" key="CommitChangelistDialog2" timestamp="1579119706036">
+    <state x="301" y="51" key="CommitChangelistDialog2" timestamp="1579337094723">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state x="301" y="51" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1579119706036" />
-    <state width="1127" height="235" key="GridCell.Tab.0.bottom" timestamp="1579334845177">
+    <state x="301" y="51" key="CommitChangelistDialog2/0.0.1440.900@0.0.1440.900" timestamp="1579337094723" />
+    <state width="1127" height="235" key="GridCell.Tab.0.bottom" timestamp="1579337085864">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1127" height="235" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1579334845177" />
+    <state width="1127" height="235" key="GridCell.Tab.0.bottom/0.0.1440.900@0.0.1440.900" timestamp="1579337085864" />
     <state width="1127" height="172" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1579127407311" />
     <state width="814" height="172" key="GridCell.Tab.0.bottom/39.23.1401.877@39.23.1401.877" timestamp="1579201019488" />
-    <state width="1127" height="235" key="GridCell.Tab.0.center" timestamp="1579334845176">
+    <state width="1127" height="235" key="GridCell.Tab.0.center" timestamp="1579337085862">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1127" height="235" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1579334845176" />
+    <state width="1127" height="235" key="GridCell.Tab.0.center/0.0.1440.900@0.0.1440.900" timestamp="1579337085862" />
     <state width="1127" height="172" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1579127407310" />
     <state width="814" height="172" key="GridCell.Tab.0.center/39.23.1401.877@39.23.1401.877" timestamp="1579201019487" />
-    <state width="1127" height="235" key="GridCell.Tab.0.left" timestamp="1579334845175">
+    <state width="1127" height="235" key="GridCell.Tab.0.left" timestamp="1579337085861">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1127" height="235" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1579334845175" />
+    <state width="1127" height="235" key="GridCell.Tab.0.left/0.0.1440.900@0.0.1440.900" timestamp="1579337085861" />
     <state width="1127" height="172" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1579127407309" />
     <state width="814" height="172" key="GridCell.Tab.0.left/39.23.1401.877@39.23.1401.877" timestamp="1579201019487" />
-    <state width="1127" height="235" key="GridCell.Tab.0.right" timestamp="1579334845176">
+    <state width="1127" height="235" key="GridCell.Tab.0.right" timestamp="1579337085864">
       <screen x="0" y="0" width="1440" height="900" />
     </state>
-    <state width="1127" height="235" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1579334845176" />
+    <state width="1127" height="235" key="GridCell.Tab.0.right/0.0.1440.900@0.0.1440.900" timestamp="1579337085864" />
     <state width="1127" height="172" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1579127407310" />
     <state width="814" height="172" key="GridCell.Tab.0.right/39.23.1401.877@39.23.1401.877" timestamp="1579201019488" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/home/Sidebar.js</url>
+          <line>16</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -47,8 +47,32 @@ const sidebar = {
 };
 
 class App extends React.Component {
+	onChange = (event, page) => {
+		const { page: { currentPage, rowsPerPage }, deals } = this.state;
+		
+		const start = currentPage * rowsPerPage;
+		const end = start + rowsPerPage;
+		this.setState(prevState => {
+			return {
+				dealsOnPage: deals.slice(start, end),
+				page: {
+					...prevState.page,
+					currentPage: page
+				}
+			}
+		})
+	};
+	
 	state = {
-		deals: []
+		deals: [],
+		dealsOnPage: [],
+		page: {
+			currentPage: 0,
+			rowsPerPage: 20,
+			rowsPerPageOptions: [20, 40],
+			totalItems: 0,
+			onChange: this.onChange
+		}
 	};
 	
 	constructor(props) {
@@ -65,13 +89,26 @@ class App extends React.Component {
 		Axios.post('https://leasing.deals/get-all-deals', data)
 			.then(resp => resp.data)
 			.then(response => {
-				this.setState({ ...response });
+				const deals = response.deals;
+				
+				this.setState(prevState => {
+					const start = prevState.page.currentPage * prevState.page.rowsPerPage;
+					const end = start + prevState.page.rowsPerPage;
+					return {
+						deals,
+						dealsOnPage: deals.slice(start, end),
+						page: {
+							...prevState.page,
+							totalItems: deals.length
+						}
+					}
+				});
 			});
 	}
 	
 	render() {
 		const { classes } = this.props;
-		const { deals } = this.state;
+		const { dealsOnPage, page } = this.state;
 		
 		return (
 			<React.Fragment>
@@ -91,7 +128,7 @@ class App extends React.Component {
 								archives={sidebar.archives}
 								social={sidebar.social}
 							/>
-							<Main title="Car Models List" deals={deals}/>
+							<Main title="Car Models List" deals={dealsOnPage} page={page} />
 						</Grid>
 					</main>
 				</Container>
