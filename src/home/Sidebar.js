@@ -31,7 +31,31 @@ export default function Sidebar(props) {
 				<Divider />
 				
 				{/*add filters here and replace the archives*/}
+				{/* <span onClick={() => this.sortingHandler('title')}>Title</span>
+                            <input type="text"
+                                   id="title_filter"
+                                   value={this.state.titleFilter}
+                                   onChange={this.titleFilterHandler.bind(this)}
+                                   className="form-control"/> */}
+				{/* constructor(props) {
+						super(props);
+
+						this.state = {
+							reverse: false,
+							titleFilter: ''
+						}; */}
+
+				{/* titleFilterHandler(e) {
+						this.setState({
+							titleFilter: e.target.value
+						});
+						this.props.onFilter(e.target.value || '');
+					} */}
 				
+				{/* onFilter(filterBy) {
+					this.setState({ filterBy });
+					this.getBlogPosts(this.state.currentPageNumber, this.state.limit, filterBy);
+    				} */}
 			</Paper>
 			<Typography variant="h6" gutterBottom className={classes.sidebarSection}>
 				Social
