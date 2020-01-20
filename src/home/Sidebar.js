@@ -1,4 +1,10 @@
 import Divider from '@material-ui/core/Divider';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import Slider from '@material-ui/core/Slider';
+import SvgIcon from '@material-ui/core/SvgIcon';
+import EuroIcon from '@material-ui/icons/Euro';
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
@@ -15,11 +21,25 @@ const useStyles = makeStyles(theme => ({
 	sidebarSection: {
 		marginTop: theme.spacing(3),
 	},
+	empty: {
+		width: '100%',
+		marginTop: '12px',
+		marginBottom: '12px',
+	}
 }));
+
+function sliderValueText(value) {
+	return <React.Fragment>
+			<SvgIcon fontSize="small" component={EuroIcon} />{value}
+		</React.Fragment>;
+}
 
 export default function Sidebar(props) {
 	const classes = useStyles();
-	const { description, social, title } = props;
+	const {
+		description, social, title, handleChange, sliderValue, transmission,
+		onChangeTransmission, engineType, onChangeEngineType
+	} = props;
 	
 	return (
 		<Grid item xs={12} md={4}>
@@ -30,32 +50,44 @@ export default function Sidebar(props) {
 				<Typography>{description}</Typography>
 				<Divider />
 				
-				{/*add filters here and replace the archives*/}
-				{/* <span onClick={() => this.sortingHandler('title')}>Title</span>
-                            <input type="text"
-                                   id="title_filter"
-                                   value={this.state.titleFilter}
-                                   onChange={this.titleFilterHandler.bind(this)}
-                                   className="form-control"/> */}
-				{/* constructor(props) {
-						super(props);
-
-						this.state = {
-							reverse: false,
-							titleFilter: ''
-						}; */}
-
-				{/* titleFilterHandler(e) {
-						this.setState({
-							titleFilter: e.target.value
-						});
-						this.props.onFilter(e.target.value || '');
-					} */}
+				<Typography id="range-slider" gutterBottom>Monthly rental Range</Typography>
+				<Slider
+					value={sliderValue}
+					onChange={handleChange}
+					valueLabelDisplay="auto"
+					valueLabelFormat={sliderValueText}
+					aria-labelledby="range-slider"
+					getAriaValueText={sliderValueText}
+					defaultValue={[50, 400]}
+					min={50}
+					max={950}
+				/>
 				
-				{/* onFilter(filterBy) {
-					this.setState({ filterBy });
-					this.getBlogPosts(this.state.currentPageNumber, this.state.limit, filterBy);
-    				} */}
+				<InputLabel id="demo-simple-select-label" className={classes.empty}>Transmission</InputLabel>
+				<Select
+					autoWidth={true}
+					labelId="demo-simple-select-label"
+					id="demo-simple-select"
+					value={transmission}
+					onChange={onChangeTransmission}
+				>
+					<MenuItem value="">--------------------</MenuItem>
+					<MenuItem value="Automatic">Automatic</MenuItem>
+					<MenuItem value="Manual">Manual</MenuItem>
+				</Select>
+				
+				<InputLabel id="demo-simple-select-label" className={classes.empty}>Engine Type</InputLabel>
+				<Select
+					autoWidth={true}
+					labelId="demo-simple-select-label"
+					id="demo-simple-select"
+					value={engineType}
+					onChange={onChangeEngineType}
+				>
+					<MenuItem value="">--------------------</MenuItem>
+					<MenuItem value="Diesel">Diesel</MenuItem>
+					<MenuItem value="Petrol">Petrol</MenuItem>
+				</Select>
 			</Paper>
 			<Typography variant="h6" gutterBottom className={classes.sidebarSection}>
 				Social
@@ -79,4 +111,10 @@ Sidebar.propTypes = {
 	description: PropTypes.string,
 	social: PropTypes.array,
 	title: PropTypes.string,
+	sliderValue: PropTypes.array,
+	handleChange: PropTypes.func,
+	transmission: PropTypes.string,
+	onChangeTransmission: PropTypes.func,
+	engineType: PropTypes.string,
+	onChangeEngineType: PropTypes.func,
 };

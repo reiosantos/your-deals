@@ -1,17 +1,17 @@
-import withStyles from '@material-ui/core/styles/withStyles';
-import Axios from 'axios';
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Grid from '@material-ui/core/Grid';
-import Container from '@material-ui/core/Container';
-import GitHubIcon from '@material-ui/icons/GitHub';
+import {makeStyles} from '@material-ui/core/styles';
+import withStyles from '@material-ui/core/styles/withStyles';
 import FacebookIcon from '@material-ui/icons/Facebook';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import Axios from 'axios';
+import React from 'react';
 import FeaturedCars from './FeatureCar';
+import Footer from './Footer';
 import Header from './Header';
 import Main from './Main';
-import Footer from './Footer';
 import Sidebar from './Sidebar';
 
 const useStyles = makeStyles(theme => ({
@@ -65,6 +65,7 @@ class App extends React.Component {
 	
 	state = {
 		deals: [],
+		unFilteredDeals: [],
 		dealsOnPage: [],
 		page: {
 			currentPage: 0,
@@ -72,7 +73,10 @@ class App extends React.Component {
 			rowsPerPageOptions: [20, 40],
 			totalItems: 0,
 			onChange: this.onChange
-		}
+		},
+		sliderValue: [50, 400],
+		transmission: '',
+		engineType: ''
 	};
 	
 	constructor(props) {
@@ -96,6 +100,7 @@ class App extends React.Component {
 					const end = start + prevState.page.rowsPerPage;
 					return {
 						deals,
+						unFilteredDeals: deals,
 						dealsOnPage: deals.slice(start, end),
 						page: {
 							...prevState.page,
@@ -106,9 +111,61 @@ class App extends React.Component {
 			});
 	}
 	
+	afterUpdateState = () => {
+		const { sliderValue: [min, max], unFilteredDeals, transmission, engineType } = this.state;
+		const engineT = engineType.trim().toLowerCase();
+		const transmissionT = transmission.trim().toLowerCase();
+		
+		const deals = unFilteredDeals.filter((deal) => {
+			const { monthly_rental } = deal;
+			
+			if (engineT !== '' && transmissionT !== '') {
+				return min <= monthly_rental && monthly_rental <= max && transmissionT === deal.transmission.toLowerCase() && engineT === deal.engine_type.toLowerCase();
+			}
+			if (engineT !== '') {
+				return min <= monthly_rental && monthly_rental <= max && engineT === deal.engine_type.toLowerCase();
+			}
+			
+			if (transmissionT !== '') {
+				return min <= monthly_rental && monthly_rental <= max && transmissionT === deal.transmission.toLowerCase();
+			}
+			return min <= monthly_rental && monthly_rental <= max;
+		});
+		
+		const { page: { currentPage, rowsPerPage } } = this.state;
+		const start = currentPage * rowsPerPage;
+		const end = start + rowsPerPage;
+		
+		this.setState(prevState => {
+			return {
+				deals,
+				dealsOnPage: deals.slice(start, end),
+				page: {
+					...prevState.page,
+					totalItems: deals.length,
+					currentPage: 0
+				}
+			}
+		})
+	};
+	
+	handleChange = (event, newValue) => {
+		this.setState({ sliderValue: newValue }, this.afterUpdateState)
+	};
+	
+	onChangeTransmission = (event) => {
+		const { value } = event.target;
+		this.setState({ transmission: value }, this.afterUpdateState)
+	};
+	
+	onChangeEngineType = (event) => {
+		const { value } = event.target;
+		this.setState({ engineType: value }, this.afterUpdateState)
+	};
+	
 	render() {
 		const { classes } = this.props;
-		const { dealsOnPage, page } = this.state;
+		const { dealsOnPage, page, sliderValue, transmission, engineType } = this.state;
 		
 		return (
 			<React.Fragment>
@@ -127,6 +184,12 @@ class App extends React.Component {
 								description={sidebar.description}
 								archives={sidebar.archives}
 								social={sidebar.social}
+								handleChange={this.handleChange}
+								sliderValue={sliderValue}
+								onChangeTransmission={this.onChangeTransmission}
+								transmission={transmission}
+								onChangeEngineType={this.onChangeEngineType}
+								engineType={engineType}
 							/>
 							<Main title="Car Models List" deals={dealsOnPage} page={page} />
 						</Grid>

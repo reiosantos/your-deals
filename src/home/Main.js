@@ -34,7 +34,7 @@ Main.propTypes = {
 	page: PropTypes.shape({
 		currentPage: PropTypes.number,
 		rowsPerPage: PropTypes.number,
-		rowsPerPageOptions: PropTypes.number,
+		rowsPerPageOptions: PropTypes.array,
 		totalItems: PropTypes.number,
 		onChangePage: PropTypes.func,
 	}),
